@@ -1,0 +1,20 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+class Solution
+{
+    public:
+    int longestSubsequence(vector<int>& arr, int difference)
+    {
+        int n = arr.size();
+        map<int, int> dp;
+
+        int ans = 0;
+        for(int i = 0; i < n; i++)
+        {
+            dp[arr[i]] = dp[arr[i] - difference] + 1;
+            ans = max(ans, dp[arr[i]]);
+        }
+        return ans;
+    }
+};
