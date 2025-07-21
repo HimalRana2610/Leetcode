@@ -1,0 +1,39 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+class Solution
+{
+public:
+    long long splitArray(vector<int> &nums)
+    {
+        int n = nums.size();
+        vector<bool> is_prime(n + 1, true);
+        is_prime[0] = is_prime[1] = false;
+
+        for (int i = 2; i * i <= n; i++)
+        {
+            if (is_prime[i])
+            {
+                for (int j = i * i; j <= n; j += i)
+                {
+                    is_prime[j] = false;
+                }
+            }
+        }
+
+        long long a = 0, b = 0;
+        for (int i = 0; i < n; i++)
+        {
+            if (is_prime[i])
+            {
+                a += nums[i];
+            }
+            else
+            {
+                b += nums[i];
+            }
+        }
+
+        return abs(a - b);
+    }
+};
